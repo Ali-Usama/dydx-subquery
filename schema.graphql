@@ -2,31 +2,35 @@
 # Add the `@index` or `@index(unique: true)` annotation after any non-key field
 # https://academy.subquery.network/build/graphql.html#indexing-by-non-primary-key-field
 
-# type Block @entity {
-#   id: ID! # The block hash
-#   height: BigInt!
-# }
+type Block @entity {
+    id: ID! # The block hash
+    height: BigInt!
+}
 
-# type Transaction @entity {
-#   id: ID!
-#   blockHeight: BigInt!
-#   timestamp: String!
-# }
+#type Transaction @entity {
+#    id: ID!
+#    blockHeight: BigInt!
+#    timestamp: String!
+#    txHash: String!
+#    recipient: String!
+#    sender: String!
+#    amount: String!
+#}
 
 type TransferEvent @entity {
-  id: ID!
-  blockHeight: BigInt!
-  txHash: String!
-  recipient: String!
-  sender: String!
-  amount: String!
+    id: ID!
+    blockHeight: BigInt!
+    txHash: String!
+    recipient: String!
+    sender: String!
+    amount: String!
 }
 
 type Message @entity {
-  id: ID!
-  blockHeight: BigInt!
-  txHash: String!
-  from: String!
-  to: String!
-  amount: String!
+    id: ID!
+    blockHeight: BigInt!
+    txHash: String!
+    from: String!
+    to: String!
+    amount: String!
 }

@@ -1,4 +1,4 @@
-import { TransferEvent, Message } from "../types";
+import { TransferEvent, Message, Block } from "../types";
 import {
   CosmosEvent,
   CosmosBlock,
@@ -7,11 +7,17 @@ import {
 } from "@subql/types-cosmos";
 import { MsgSend } from "../types/proto-interfaces/cosmos/bank/v1beta1/tx";
 
-/*
+
 export async function handleBlock(block: CosmosBlock): Promise<void> {
   // If you want to index each block in Cosmos (DYDX), you could do that here
+  logger.info(`Block found at ${block.block.header.height}`);
+  const blockRecord = Block.create({
+    id: block.block.id,
+    height: BigInt(block.block.header.height),
+  })
+  await blockRecord.save();
 }
-*/
+
 
 /*
 export async function handleTransaction(tx: CosmosTransaction): Promise<void> {

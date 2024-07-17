@@ -37,7 +37,7 @@ services:
       - --db-schema=app
       - --workers=1
       - --batch-size=1
-      - --unfinalized-blocks=true
+      - --unfinalized-blocks=false
     healthcheck:
       test: ["CMD", "curl", "-f", "http://subquery-node:3000/ready"]
       interval: 3s

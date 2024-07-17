@@ -61,3 +61,5 @@ dist
 # ENV local files
 .env.local
 .env.develop.local
+
+.project-cid
