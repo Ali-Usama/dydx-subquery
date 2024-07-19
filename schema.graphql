@@ -15,7 +15,7 @@ type Block @entity {
 #    recipient: String!
 #    sender: String!
 #    amount: String!
-#}
+#}0
 
 type TransferEvent @entity {
     id: ID!
@@ -33,4 +33,23 @@ type Message @entity {
     from: String!
     to: String!
     amount: String!
+}
+
+type Position @entity {
+    id: ID!
+    positionId: String!
+    account: String! @index
+    subAccount: Int
+    assetSymbol: String!
+    collateralSymbol: String!
+    timeOpened: BigInt!
+    timeClosed: BigInt
+    leverage: Float
+    balanceUsd: Float
+    side: String!
+    pnl: Float
+    liquidationPrice: Float
+    openPriceUsd: Float
+    lastPriceUsd: Float
+    liquidationBlock: Block!
 }
