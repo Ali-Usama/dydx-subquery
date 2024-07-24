@@ -53,3 +53,13 @@ type Position @entity {
     lastPriceUsd: Float
     liquidationBlock: Block!
 }
+
+type Asset @entity {
+    id: ID!,
+    symbol: String! @index,
+    name: String!,
+    account: String!,
+    subaccount: String!,
+    balance: String!,
+    blockHeight: BigInt!
+}

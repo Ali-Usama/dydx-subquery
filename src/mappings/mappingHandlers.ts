@@ -47,30 +47,9 @@ export async function handleMessage(
   await messageRecord.save();
 }
 
-export async function handleEvent(event: CosmosEvent): Promise<void> {
-  logger.info(`Event found at ${event.block.blockId}`);
-  const eventRecord = TransferEvent.create({
-    id: `${event.tx.hash}-${event.msg.idx}-${event.idx}`,
-    blockHeight: BigInt(event.block.block.header.height),
-    txHash: event.tx.hash,
-    recipient: "",
-    amount: "",
-    sender: "",
-  });
-  for (const attr of event.event.attributes) {
-    switch (attr.key) {
-      case "recipient":
-        eventRecord.recipient = attr.value;
-        break;
-      case "amount":
-        eventRecord.amount = attr.value;
-        break;
-      case "sender":
-        eventRecord.sender = attr.value;
-        break;
-      default:
-        break;
-    }
-  }
-  await eventRecord.save();
+export async function handleUpdateSubaccount(event: CosmosEvent): Promise<void> {
+  logger.info(`Event found at ${event.block.header.height.toString()}`);
+  logger.info(
+    `SubAccount update event: ${JSON.stringify(event.event.attributes, null, 2)}`
+  );
 }
