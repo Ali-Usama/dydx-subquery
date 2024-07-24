@@ -67,12 +67,33 @@ const project: CosmosProject = {
           messages: ["WeightedVoteOption"],
         },
       ],
+      [
+        "dydxprotocol.assets",
+        {
+          file: "./proto/dydxprotocol/assets/query.proto",
+          messages: ["QueryAssetRequest"],
+        },
+      ],
+      [
+        "dydxprotocol.subaccounts",
+        {
+          file: "./proto/dydxprotocol/subaccounts/subaccount.proto",
+          messages: ["SubaccountId", "Subaccount"],
+        },
+      ],
+      [
+        "dydxprotocol.indexer.events",
+        {
+          file: "./proto/dydxprotocol/indexer/events/events.proto",
+          messages: ["SubaccountUpdateEventV1"],
+        },
+      ],
     ]),
   },
   dataSources: [
     {
       kind: CosmosDatasourceKind.Runtime,
-      startBlock: 13332000,
+      startBlock: 13333000,
       mapping: {
         file: "./dist/index.js",
         handlers: [
@@ -81,22 +102,12 @@ const project: CosmosProject = {
             kind: CosmosHandlerKind.Block,
           },
           {
-            handler: "handleEvent",
+            handler: "handleUpdateSubaccount",
             kind: CosmosHandlerKind.Event,
             filter: {
-              type: "transfer",
-              messageFilter: {
-                type: "/cosmos.bank.v1beta1.MsgSend",
-              },
-            },
-          },
-          {
-            handler: "handleMessage",
-            kind: CosmosHandlerKind.Message,
-            filter: {
-              type: "/cosmos.bank.v1beta1.MsgSend",
-            },
-          },
+              type: "dydxprotocol.indexer.events.SubaccountUpdateEventV1",
+            }
+          }
         ],
       },
     },
